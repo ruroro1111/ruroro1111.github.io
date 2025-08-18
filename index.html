@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelBook Pro</title>
+    <title>SparkleBook Magic</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Comic Sans MS', cursive;
         }
 
         :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --light: #f8fafc;
+            --pink1: #FF69B4;
+            --pink2: #FFB6C1;
+            --pink3: #FFC0CB;
+            --gold: #FFD700;
         }
 
         body {
-            background: #f0f4f8;
+            background: linear-gradient(45deg, #ffe6f2, #fff0f5);
+            min-height: 100vh;
         }
 
         .header {
-            background: white;
+            background: linear-gradient(135deg, var(--pink1), var(--pink2));
             padding: 1rem 5%;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: fixed;
@@ -40,9 +42,10 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary);
+            color: white;
+            text-shadow: 0 0 10px var(--gold);
         }
 
         .nav-links {
@@ -52,23 +55,36 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: white;
             font-weight: 500;
+            text-shadow: 0 0 5px var(--gold);
         }
 
         .search-container {
             padding: 8rem 5% 4rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: 
+                radial-gradient(circle at 50% 50%, 
+                rgba(255,182,193,0.8) 0%, 
+                rgba(255,192,203,0.6) 50%, 
+                rgba(255,240,245,0.4) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.7"/><circle cx="30" cy="30" r="1" fill="white" opacity="0.5"/><circle cx="70" cy="70" r="1" fill="white" opacity="0.5"/></svg>');
             min-height: 100vh;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         .search-tabs {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+            border: 2px solid var(--pink1);
         }
 
         .tab-buttons {
@@ -79,16 +95,19 @@
 
         .tab-btn {
             padding: 1rem 2rem;
-            border: none;
-            background: #f1f5f9;
-            border-radius: 5px;
+            border: 2px solid var(--pink1);
+            background: white;
+            border-radius: 50px;
             cursor: pointer;
             transition: 0.3s;
+            color: var(--pink1);
+            font-weight: bold;
         }
 
         .tab-btn.active {
-            background: var(--primary);
+            background: var(--pink1);
             color: white;
+            box-shadow: 0 0 15px var(--gold);
         }
 
         .search-form {
@@ -104,30 +123,35 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #444;
+            color: var(--pink1);
+            font-weight: bold;
         }
 
         .form-control {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 5px;
+            border: 2px solid var(--pink2);
+            border-radius: 15px;
             font-size: 1rem;
+            background: rgba(255,255,255,0.9);
         }
 
         .search-btn {
-            background: var(--primary);
+            background: linear-gradient(45deg, var(--pink1), var(--pink2));
             color: white;
             padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1.1rem;
             transition: 0.3s;
+            text-shadow: 0 0 5px var(--gold);
+            box-shadow: 0 0 10px rgba(255,105,180,0.5);
         }
 
         .search-btn:hover {
-            background: var(--secondary);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--gold);
         }
 
         .results-section {
@@ -145,36 +169,72 @@
         }
 
         .result-card {
-            background: white;
-            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(255,105,180,0.3);
             transition: 0.3s;
+            border: 2px solid var(--pink2);
+            position: relative;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.1) 50%, 
+                transparent 100%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-50%, -50%) rotate(45deg); }
+            100% { transform: translate(50%, 50%) rotate(45deg); }
         }
 
         .result-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(255,105,180,0.5);
         }
 
         .card-image {
             height: 180px;
-            background: #e2e8f0;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+                        url('https://picsum.photos/300/180?random=1');
             background-size: cover;
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: var(--gold);
         }
 
         .card-content {
             padding: 1.5rem;
+            position: relative;
         }
 
         .price {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: var(--pink1);
             font-weight: 700;
             margin: 1rem 0;
+            text-shadow: 0 0 5px var(--gold);
         }
 
         .compare-checkbox {
             margin-top: 1rem;
+            color: var(--pink1);
         }
 
         .booking-modal {
@@ -183,19 +243,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(255,182,193,0.8);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .booking-form {
             background: white;
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 20px;
             width: 90%;
             max-width: 500px;
+            border: 3px solid var(--pink1);
+            box-shadow: 0 0 30px rgba(255,105,180,0.7);
+        }
+
+        .booking-form h2 {
+            color: var(--pink1);
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px var(--gold);
         }
 
         @media (max-width: 768px) {
@@ -212,13 +282,13 @@
 <body>
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">TravelBook Pro</div>
+            <div class="logo">✨ SparkleBook</div>
             <div class="nav-links">
                 <a href="#flights">Flights</a>
                 <a href="#hotels">Hotels</a>
                 <a href="#cars">Cars</a>
-                <a href="#deals">Deals</a>
-                <a href="#support">Support</a>
+                <a href="#deals">Magic Deals</a>
+                <a href="#support">Fairy Support</a>
             </div>
         </nav>
     </header>
@@ -226,85 +296,85 @@
     <section class="search-container">
         <div class="search-tabs">
             <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="flights">Flights</button>
-                <button class="tab-btn" data-tab="hotels">Hotels</button>
-                <button class="tab-btn" data-tab="cars">Cars</button>
+                <button class="tab-btn active" data-tab="flights">✈️ Flights</button>
+                <button class="tab-btn" data-tab="hotels">🏨 Hotels</button>
+                <button class="tab-btn" data-tab="cars">🚗 Magic Cars</button>
             </div>
             
             <form class="search-form" id="searchForm">
                 <!-- Flight Search Fields -->
                 <div class="form-group" data-tab="flights">
-                    <label>From</label>
-                    <input type="text" class="form-control" placeholder="Departure City">
+                    <label>🛫 Departure</label>
+                    <input type="text" class="form-control" placeholder="Castle or City">
                 </div>
                 <div class="form-group" data-tab="flights">
-                    <label>To</label>
-                    <input type="text" class="form-control" placeholder="Destination City">
+                    <label>🛬 Arrival</label>
+                    <input type="text" class="form-control" placeholder="Enchanted Forest">
                 </div>
                 <div class="form-group" data-tab="flights">
-                    <label>Departure Date</label>
+                    <label>🗓️ Departure Date</label>
                     <input type="date" class="form-control">
                 </div>
                 <div class="form-group" data-tab="flights">
-                    <label>Return Date</label>
+                    <label>🗓️ Return Date</label>
                     <input type="date" class="form-control">
                 </div>
 
                 <!-- Hotel Search Fields -->
                 <div class="form-group" data-tab="hotels" style="display:none">
-                    <label>Destination</label>
-                    <input type="text" class="form-control" placeholder="City or Hotel Name">
+                    <label>🌟 Magic Location</label>
+                    <input type="text" class="form-control" placeholder="Enchanted Castle">
                 </div>
                 <div class="form-group" data-tab="hotels" style="display:none">
-                    <label>Check-in</label>
+                    <label>🗓️ Check-in</label>
                     <input type="date" class="form-control">
                 </div>
                 <div class="form-group" data-tab="hotels" style="display:none">
-                    <label>Check-out</label>
+                    <label>🗓️ Check-out</label>
                     <input type="date" class="form-control">
                 </div>
 
                 <!-- Car Search Fields -->
                 <div class="form-group" data-tab="cars" style="display:none">
-                    <label>Pickup Location</label>
-                    <input type="text" class="form-control" placeholder="City or Airport">
+                    <label>🚙 Pickup Location</label>
+                    <input type="text" class="form-control" placeholder="Magic Forest">
                 </div>
                 <div class="form-group" data-tab="cars" style="display:none">
-                    <label>Pickup Date</label>
+                    <label>🗓️ Pickup Date</label>
                     <input type="date" class="form-control">
                 </div>
                 <div class="form-group" data-tab="cars" style="display:none">
-                    <label>Return Date</label>
+                    <label>🗓️ Return Date</label>
                     <input type="date" class="form-control">
                 </div>
 
-                <button type="submit" class="search-btn">Search</button>
+                <button type="submit" class="search-btn">🔮 Find Magic Deals</button>
             </form>
         </div>
     </section>
 
     <section class="results-section" id="resultsSection">
-        <h2>Search Results</h2>
+        <h2>✨ Enchanted Results ✨</h2>
         <div class="results-grid" id="resultsGrid"></div>
     </section>
 
     <div class="booking-modal" id="bookingModal">
         <div class="booking-form">
-            <h2>Booking Details</h2>
+            <h2>🧚‍♀️ Book Your Magic Trip 🧚‍♀️</h2>
             <form id="bookingForm">
                 <div class="form-group">
-                    <label>Full Name</label>
+                    <label>🧑 Name</label>
                     <input type="text" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>📧 Magic Email</label>
                     <input type="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone</label>
+                    <label>📱 Crystal Phone</label>
                     <input type="tel" class="form-control" required>
                 </div>
-                <button type="submit" class="search-btn" style="width: 100%">Confirm Booking</button>
+                <button type="submit" class="search-btn" style="width: 100%">✨ Confirm Magic Booking ✨</button>
             </form>
         </div>
     </div>
@@ -344,20 +414,20 @@
             const mockResults = [
                 {
                     type: 'flight',
-                    title: 'New York to London',
-                    price: '$450',
+                    title: 'Enchanted Forest Express',
+                    price: '💎 250 Crystals',
                     image: 'https://picsum.photos/300/180?random=1'
                 },
                 {
                     type: 'hotel',
-                    title: 'Luxury Hotel - Paris',
-                    price: '$200/night',
+                    title: 'Dragon Castle Suite',
+                    price: '💎 150 Crystals/night',
                     image: 'https://picsum.photos/300/180?random=2'
                 },
                 {
                     type: 'car',
-                    title: 'SUV - Los Angeles',
-                    price: '$80/day',
+                    title: 'Unicorn Carriage',
+                    price: '💎 80 Crystals/day',
                     image: 'https://picsum.photos/300/180?random=3'
                 }
             ];
@@ -376,9 +446,9 @@
                         <div class="price">${result.price}</div>
                         <div class="compare-checkbox">
                             <input type="checkbox" id="compare-${result.title}">
-                            <label for="compare-${result.title}">Compare</label>
+                            <label for="compare-${result.title}">🔮 Compare Magic</label>
                         </div>
-                        <button class="search-btn" onclick="openBookingModal()">Book Now</button>
+                        <button class="search-btn" onclick="openBookingModal()">🧙‍♀️ Book Magic</button>
                     </div>
                 `;
                 resultsGrid.appendChild(card);
@@ -400,7 +470,7 @@
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Booking confirmed!');
+            alert('✨ Magic Booking Confirmed! ✨');
             document.getElementById('bookingModal').style.display = 'none';
         });
     </script>
